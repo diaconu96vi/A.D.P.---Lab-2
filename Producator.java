@@ -11,6 +11,7 @@ public class Producator extends Thread {
 		try {
 			while(true) {
 				item = produce();
+				Thread.sleep(2500);
 				Main.semFree.acquire();
 				Main.s.acquire();
 				
@@ -22,10 +23,10 @@ public class Producator extends Thread {
 					
 					System.out.println("A fost produs elememntul" + item);
 					System.out.println(" ");
+					Main.semFull.release();
 				}
 				Main.s.release();
-				Main.semFull.release();
-				Thread.sleep(2500);
+
 			}
 		}
 		catch (InterruptedException e) {
